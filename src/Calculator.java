@@ -18,6 +18,7 @@ public class Calculator implements ActionListener {
 	
 	String oldValue;
 	String newValue;
+	String sum;
 	
 	JLabel displayLabel;
 	JButton sevenButton;
@@ -42,6 +43,7 @@ public class Calculator implements ActionListener {
 	Float result;
 	Float oldValueF;
 	Float newValueF;
+	Float sumF;
 	
 	
 	public Calculator() {
@@ -174,6 +176,21 @@ public class Calculator implements ActionListener {
 		new Calculator();
 	}
 
+	private void callAdd(ActionEvent e) {
+		plusButton.addActionListener(this);
+		
+		while(e.getSource() == plusButton) {
+			isAddOp = true;
+			oldValueF = result;
+			newValue = displayLabel.getText();
+			Float newValueF = Float.parseFloat(newValue);
+			Float result = oldValueF+newValueF;
+//			String result1 = String.valueOf(result);
+			
+			displayLabel.setText(result+"");
+		}
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == sevenButton) {
@@ -296,8 +313,8 @@ public class Calculator implements ActionListener {
 		}
 		else if(e.getSource() == plusButton){
 			isOperatorClicked = true;
-			oldValue = displayLabel.getText();
-			isAddOp = true;
+			callAdd(e);
+//			displayLabel.setText(String.valueOf(result));
 		}
 		else if(e.getSource() == minusButton){
 			isOperatorClicked = true;
@@ -312,7 +329,6 @@ public class Calculator implements ActionListener {
 			oldValue = displayLabel.getText();
 			isDivOp = true;
 		}
-		
-		
 	}
+	
 }
